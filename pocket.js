@@ -26,7 +26,7 @@ case 'list':
     var result = JSON.parse(response.body);
     result.forEach(function(item) {
       var d = new Date(item.date);
-      console.log("(" + d.getFullYear() + '/' + d.getMonth()+1 + '/' + d.getDate() + ") " + item.amount + '円');
+      console.log("(" + d.getFullYear() + '/' + (parseInt(d.getMonth(), 10) + 1) + '/' + d.getDate() + ") " + item.amount + '円');
     });
   });
   break;
