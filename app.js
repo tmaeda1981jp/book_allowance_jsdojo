@@ -12,10 +12,8 @@ var express = require("express"),
 
 var app = express();
 
-var db = {
-  items: []
-};
-var account = new Account(db);
+var db_name = "pocket_db";
+var account = new Account(db_name);
 
 app.configure(function () {
   app.use(express.cookieParser());
@@ -51,7 +49,6 @@ app.post("/add", function (req, res) {
     amount: req.body.amount
   });
   account.add(item);
-  console.log(util.inspect(db.items, false, null, true));
   res.send({result: "success"});
 });
 
