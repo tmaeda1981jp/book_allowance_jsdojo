@@ -8,13 +8,12 @@ var express = require("express"),
     http = require("http"),
     path = require("path"),
     util = require("util"),
-    Account = require("./model/account"),
-    Item = require("./model/item");
+    model = require("./model");
+
+var db_name = "pocket_db",
+    account = new model.Account(db_name);
 
 var app = express();
-
-var db_name = "pocket_db";
-var account = new Account(db_name);
 
 app.configure(function () {
   app.set("view engine", "html");
@@ -45,32 +44,49 @@ app.configure("production", function () {
 });
 
 app.get("/mypage", function (req, res) {
-  account.list(function(items) {
+  account.list(function(err, items) {
     var list = items.map(function (item) {
+      if (err)
+        return res.send(500, "Internal Server Error");
+      
       var d = new Date(item.date);
-      return [[d.getFullYear(), d.getMonth() + 1, d.getDate()].join("/"), item.amount];
+      return [
+        [d.getFullYear(), d.getMonth() + 1, d.getDate()].join("/"),
+        item.amount
+      ];
     });
     res.render("mypage", {list: list});
   });
 });
 
 app.post("/add", function (req, res) {
-  var item = new Item({
+  var item = {
     date: req.body.date,
     amount: req.body.amount
+  };
+  
+  account.add(item, function (err) {
+    if (err)
+      return res.json(500, {result: "error", error: err});
+    
+    res.json({result: "success"});
   });
-  account.add(item);
-  res.send({result: "success"});
 });
 
 app.get("/list", function(req, res) {
-  account.list(function(items) {
+  account.list(function(err, items) {
+    if (err)
+      return res.json(500, {result: "error", error: err});
+    
     res.json(items);
   });
 });
 
 app.get("/month", function(req, res) {
-  account.month(req.query.month, function(items) {
+  account.month(req.query.month, function (err, items) {
+    if (err)
+      return res.json(500, {result: "error", error: err});
+    
     res.json(items);
   });
 });
