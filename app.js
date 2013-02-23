@@ -45,14 +45,14 @@ app.get("/", function (req, res) {
   res.send({result: "hello"});
 });
 
-app.get("/add", function (req, res) {
+app.post("/add", function (req, res) {
   var item = new Item({
-    date: req.query.date,
-    amount: req.query.amount
+    date: req.body.date,
+    amount: req.body.amount
   });
   account.add(item);
   
-  console.log(util.inspect(db.items, true, null, true));
+  console.log(util.inspect(db.items, false, null, true));
   res.send({result: "success"});
 });
 

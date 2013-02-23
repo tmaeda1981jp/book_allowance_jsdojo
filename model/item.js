@@ -3,7 +3,10 @@
  */
 
 function Item(obj) {
-  this.date = obj.date || new Date();
+  if (typeof obj.amount === "number")
+    throw new TypeError(amount);
+  
+  this.date = obj.date ? new Date(obj.date) : new Date();
   this.amount = obj.amount;
 }
 
