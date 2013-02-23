@@ -51,9 +51,14 @@ app.post("/add", function (req, res) {
     amount: req.body.amount
   });
   account.add(item);
-  
   console.log(util.inspect(db.items, false, null, true));
   res.send({result: "success"});
+});
+
+app.get("/list", function(req, res) {
+console.log(account.list()[1]);
+  res.send({result: account.list()});
+  res.json(account.list());
 });
 
 http.createServer(app).listen(app.get("port"), function () {

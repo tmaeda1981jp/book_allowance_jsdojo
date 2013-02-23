@@ -15,13 +15,18 @@ case 'add':
   if (typeof params[2] !== 'undefined') {
     item.date = new Date(params[2]+'-00:00:00').getTime();
   }
-console.log(item.date);
   request.post(host + 'add', {form: item}, function(error, response, body) {
     console.log("success!");
   });
   break;
 case 'list':
-  console.log("未実装です．");
+  request.get(host + 'list', function(error, response, body) {
+    var result = JSON.parse(response.body);
+    result.forEach(function(item) {
+      var d = new Date(item.date);
+      console.log("(" + d.getFullYear() + '/' + d.getMonth()+1 + '/' + d.getDate() + ") " + item.amount + '円');
+    });
+  });
   break;
 default:
   console.log("");
