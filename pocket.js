@@ -16,7 +16,9 @@ case 'add':
     item.date = new Date(params[2]+'-00:00:00').getTime();
   }
   request.post(host + 'add', {form: item}, function(error, response, body) {
-    console.log("success!");
+    if (error) {
+      console.log("エラーだよ.");
+    }
   });
   break;
 case 'list':
