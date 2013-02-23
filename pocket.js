@@ -36,8 +36,7 @@ case 'month':
   if (typeof params[1] !== 'undefined') {
     var year = new Date().getFullYear(),
         yyyymm = year + ('0' + parseInt(params[1], 10)).slice(-2);
-    item.month = yyyymm;
-    request.get(host + 'month', item, function(error, response, body) {
+    request.get(host + 'month?month=' + yyyymm, function(error, response, body) {
       var result = JSON.parse(response.body), sum = 0;
       result.forEach(function(item) {
         sum += item.amount;
