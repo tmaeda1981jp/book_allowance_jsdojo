@@ -29,8 +29,8 @@ function Account(db_name) {
   }
 
   this.month = function(month, callback){
-    var req_date = "201302";
-//    var req_date = month;
+    var req_date = month;
+    console.log(req_date);
     var show_date = req_date.match(/(\d{4})(\d{2})/);
     var start_date = new Date(show_date[1],parseInt(show_date[2]) - 1, 1,0,0,0);
     var next_date = new Date(show_date[1],parseInt(show_date[2]) ,1,0,0,0);
