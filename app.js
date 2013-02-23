@@ -69,6 +69,12 @@ app.get("/list", function(req, res) {
   });
 });
 
+app.get("/month", function(req, res) {
+  account.month(req.query.month, function(items) {
+    res.json(items);
+  });
+});
+
 http.createServer(app).listen(app.get("port"), function () {
   console.log("Express server running at " + app.get("port"));
 });
