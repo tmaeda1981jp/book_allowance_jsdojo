@@ -21,6 +21,13 @@ function Account(db_name) {
       if(err){ console.log(err); }
     });
   }
+
+  this.list = function(callback){
+    var Item = mongoose.model('Item');
+    Item.find({}, function(err, items){
+      callback(items);
+    });
+  }
 }
 
 module.exports = Account;
