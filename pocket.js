@@ -38,7 +38,7 @@ case 'month':
         yyyymm = year + ('0' + parseInt(params[1], 10)).slice(-2);
     item.month = yyyymm;
     request.get(host + 'month', item, function(error, response, body) {
-      var result = JSON.parse(response.body), sum;
+      var result = JSON.parse(response.body), sum = 0;
       result.forEach(function(item) {
         sum += item.amount;
       });
