@@ -12,10 +12,11 @@ case 'add':
   var item = {
     amount: params[1]
   };
-  if (params[2] != undefined) {
-    item.date = new Date(params[2]).getTime();
+  if (typeof params[2] !== 'undefined') {
+    item.date = new Date(params[2]+'-00:00:00').getTime();
   }
-  request.post(host + 'add', item, function(error, response, body) {
+console.log(item.date);
+  request.post(host + 'add', {form: item}, function(error, response, body) {
     console.log("success!");
   });
   break;

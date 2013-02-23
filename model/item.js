@@ -6,7 +6,7 @@ function Item(obj) {
   if (typeof obj.amount === "number")
     throw new TypeError(amount);
   
-  this.date = obj.date ? new Date(obj.date) : new Date();
+  this.date = obj.date ? new Date(parseInt(obj.date, 10)) : new Date();
   this.amount = obj.amount;
 }
 
