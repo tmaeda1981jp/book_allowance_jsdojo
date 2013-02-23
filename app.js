@@ -53,9 +53,9 @@ app.post("/add", function (req, res) {
 });
 
 app.get("/list", function(req, res) {
-console.log(account.list()[1]);
-  res.send({result: account.list()});
-  res.json(account.list());
+  account.list(function(items) {
+    res.json(items);
+  });
 });
 
 http.createServer(app).listen(app.get("port"), function () {
