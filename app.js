@@ -4,6 +4,7 @@
  */
 
 var express = require("express"),
+    hogan = require("hogan-express"),
     http = require("http"),
     path = require("path"),
     util = require("util"),
@@ -16,6 +17,10 @@ var db_name = "pocket_db";
 var account = new Account(db_name);
 
 app.configure(function () {
+  app.set("view engine", "html");
+  app.set("layout", "layout");
+  app.set("views", path.join(__dirname, "views"));
+  app.engine("html", hogan);
   app.use(express.cookieParser());
   app.use(express.bodyParser());
   app.use(express.methodOverride());
@@ -40,7 +45,7 @@ app.configure("production", function () {
 });
 
 app.get("/", function (req, res) {
-  res.send({result: "hello"});
+  res.render("index", {result: "hello"});
 });
 
 app.post("/add", function (req, res) {
