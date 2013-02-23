@@ -48,7 +48,7 @@ app.get("/mypage", function (req, res) {
   account.list(function(items) {
     var list = items.map(function (item) {
       var d = new Date(item.date);
-      return "(" + d.getFullYear() + '/' + d.getMonth()+1 + '/' + d.getDate() + ") " + item.amount + '円';
+      return [[d.getFullYear(), d.getMonth() + 1, d.getDate()].join("/"), item.amount];
     });
     res.render("mypage", {list: list});
   });
