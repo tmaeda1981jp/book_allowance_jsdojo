@@ -1,0 +1,19 @@
+{
+  "name": "book_allowance_jsdojo",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "3.x",
+    "mongoose": ""
+  },
+  "devDependencies": {
+    "mocha": "",
+    "sinon": "",
+    "expect.js": ""
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "engines": {
+    "node": "0.8.20"
+  }
+}
